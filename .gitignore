@@ -1,0 +1,4 @@
+__pycache__/*
+configs/_*
+*.exe
+*.pyc

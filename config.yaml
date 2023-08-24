@@ -1,0 +1,29 @@
+main:
+  product_name: Product
+  version: '0.0.1.0'
+  author: 'intervision'
+  authorlink: 'https://github.com/intervisionlord'
+  icon: '../ui/imgs/flask.png'
+
+source:
+  mainfile: mainfile
+  outputfile: outfile
+  workdir: workdir
+
+plugins: pyqt5
+
+params:
+  - windows-disable-console
+  - follow-imports
+  - onefile
+  - standalone
+  - remove-output
+  - windows-product-name="Product Name"
+  - windows-company-name="TWR"
+  - windows-product-version
+  - windows-file-description="Product description"
+
+# files:
+#   - ui/imgs/open.png
+#   - ui/imgs/reset.png
+#   - ui/imgs/flask.png
