@@ -1,6 +1,7 @@
 import zipfile
 from yaml import full_load as loadyaml
 from os import system as runCommand
+from os import path
 from datetime import datetime
 # from functions.man import manpage as man
 
@@ -24,6 +25,7 @@ class build_config:
             ]
         self.plugins = self.config_file['plugins']
         self.params: list = self.config_file['params']
+        self.addition_files = self.config_file['files']
         self.product_name: str = self.config_file['main']['product_name']
     
     def outprint(self) -> None:
@@ -55,7 +57,27 @@ class build_config:
                              'w',
                              compression=zipfile.ZIP_DEFLATED,
                              compresslevel=9) as zipArch:
-            zipArch.write(f'{self.product_name}.exe')
+            zipArch.write(self.outfile)
+            if len(self.addition_files) > 0: # Протестировать бы, но потом...
+                for f in self.addition_files:
+                    secondpth = f'{path.basename(path.dirname(path.abspath(f)))}/{path.basename(f)}'
+                    zipArch.write(path.abspath(f), secondpth)
+        zipArch.close() # Но это не точно...
+
+# Не тестировалось
+def get_core_config() -> dict:
+    """Читает конфиг сборщка
+
+    Returns:
+        dict: Словарь с параметрами конфигурации сборщика
+    """
+    try:
+        with open('configs/core.yaml', 'r') as core_c:
+            core_config = loadyaml(core_c)
+    except FileNotFoundError:
+        print('File not found')
+        exit(6)
+    return core_config
 
 def build_start(config_input):
     config = build_config(config_input)
@@ -70,7 +92,8 @@ if __name__ == '__main__':
     else:
         build_start(config_input)
 
-# exit
+### Старые наработки, они будут понемногу переноситься в основной код,
+### Но в нормальном виде. После переноса и тестирования они должны быть удалены.
 
 # def getconfig() -> dict:
 #     """Загружает данные из конфига сборки.
