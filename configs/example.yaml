@@ -10,7 +10,7 @@ source:
   outputfile: path to the output file of your application (*.exe)
   workdir: workdir where your application will be compiled
 
-  plugins: #pyqt5 for example
+plugins: #pyqt5 for example
 
 params:
   - windows-disable-console

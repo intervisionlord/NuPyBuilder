@@ -15,20 +15,30 @@ class build_config:
                 self.config_file = loadyaml(build_config)
         except FileNotFoundError:
             exit(f'[Err.:6] Файл не найден или не указан: {config_file}')
-        self.mainfile: str = self.config_file['source']['mainfile']
-        self.outfile: str = self.config_file['source']['outputfile']
-        self.workdir: str = self.config_file['source']['workdir']
+        
+        # Cекция source конфига
+        self.mainfile, self.outfile, self.workdir = [
+            self.config_file['source']['mainfile'],
+            self.config_file['source']['output'],
+            self.config_file['source']['workdir']
+        ]
+        
+        # Секция main конфига
         self.version, self.author, self.authorlink = [
             self.config_file['main']['version'],
             self.config_file['main']['author'],
             self.config_file['main']['authorlink']
             ]
+        
+        # Прочие детали конфига
         self.plugins = self.config_file['plugins']
         self.params: list = self.config_file['params']
         self.addition_files = self.config_file['files']
         self.product_name: str = self.config_file['main']['product_name']
     
     def outprint(self) -> None:
+        """Вывод параметров конфига
+        """
         today = datetime.today().strftime('%d-%m-%Y  %H:%M:%S')
         print('-' * 10, f'\n{today}\n', '-' * 10)
         print('Config directives\n'
@@ -79,12 +89,18 @@ def get_core_config() -> dict:
         exit(6)
     return core_config
 
-def build_start(config_input):
+def build_start(config_input: str) -> None:
+    """Запуск алгоритма сборки
+
+    Args:
+        config_input (str): Путь к файлу конфига сборки
+    """
     config = build_config(config_input)
     config.outprint()
 
-
 if __name__ == '__main__':
+    """Запуск скрипта
+    """
     # man()
     config_input = input('Укажите файл сборки конфига:')
     if config_input is None or config_input == '':
