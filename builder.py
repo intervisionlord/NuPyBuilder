@@ -85,7 +85,7 @@ def get_core_config() -> dict:
         dict: Словарь с параметрами конфигурации сборщика
     """
     try:
-        with open('configs/core.yaml', 'r') as core_c:
+        with open('configs/core.yaml', 'r', encoding = 'utf8') as core_c:
             core_config = loadyaml(core_c)
     except FileNotFoundError:
         print('File not found')
@@ -165,7 +165,7 @@ if __name__ == '__main__':
 #             param = '{}="{}"'.format(param, getconfig['main']['version'])
 #         paramList.append(param)
 #     paramStr = '--' + ' --'.join(paramList)
-#     return paramStr    
+#     return paramStr
 #
 # if __name__ == '__main__':
 #     """Запуск сборки бинарного файла и его упаковка в архив.
@@ -173,5 +173,10 @@ if __name__ == '__main__':
 #     paramsStr = makeParamStr(getconfig())
 #     plugins = getconfig()['plugins']
 #     icon = getconfig()['main']['icon']
-#     runCommand(f'nuitka {paramsStr} --plugin-enable={plugins} --windows-icon-from-ico={icon} --include-data-files=../ui/imgs/*.png=imgs/ ../SimpleTester.py')
+    # runCommand(
+    #     f'nuitka {paramsStr} \
+    #         --plugin-enable={plugins}\
+    #         --windows-icon-from-ico={icon}\
+    #         --include-data-files=../ui/imgs/*.png=imgs/\
+    #             ../SimpleTester.py')
 #     zipOutput()
