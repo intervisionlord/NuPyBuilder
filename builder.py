@@ -2,6 +2,7 @@ import zipfile
 from yaml import full_load as loadyaml
 from os import system as runCommand
 from os import path
+# from sys import argv
 from datetime import datetime
 # from functions.man import manpage as man
 
@@ -15,51 +16,49 @@ class build_config:
                 self.config_file = loadyaml(build_config)
         except FileNotFoundError:
             exit(f'[Err.:6] Файл не найден или не указан: {config_file}')
-        
         # Cекция source конфига
         self.mainfile, self.outfile, self.workdir = [
             self.config_file['source']['mainfile'],
             self.config_file['source']['output'],
             self.config_file['source']['workdir']
         ]
-        
         # Секция main конфига
         self.version, self.author, self.authorlink = [
             self.config_file['main']['version'],
             self.config_file['main']['author'],
             self.config_file['main']['authorlink']
             ]
-        
         # Прочие детали конфига
         self.plugins = self.config_file['plugins']
         self.params: list = self.config_file['params']
         self.addition_files = self.config_file['files']
         self.product_name: str = self.config_file['main']['product_name']
-    
+    # Вывод параметров конфига, в случае необходимости
     def outprint(self) -> None:
         """Вывод параметров конфига
         """
         today = datetime.today().strftime('%d-%m-%Y  %H:%M:%S')
         print('-' * 10, f'\n{today}\n', '-' * 10)
         print('Config directives\n'
+              # Секция предварительных настроек
               f'WorkDir: {self.workdir}\n'
               f'Main File: {self.mainfile}\n'
               f'Output File: {self.outfile}\n'
-              
+              # Секция продукта / сборки
               '\nProdut info\n'
               f'Version: {self.version}\n'
               f'Author: {self.author}\n'
               f'Authorlink: {self.authorlink}\n'
               f'Product Name: {self.product_name}\n'
-              
+              # Секция плагинов
               '\nBuild Plugins\n'
               f'Plugins: {self.plugins}'
-              
+              # Секция параметров
               '\nBuild parameters\n'
               f'Parameters: {self.params}\n'
               )
         print('-' * 10)
-    
+    # Упаковка сборки в архив
     def zip_output(self) -> None:
         """Упаковывает собранные файлы в архив
         """
@@ -73,7 +72,6 @@ class build_config:
                     secondpth = f'{path.basename(path.dirname(path.abspath(f)))}/{path.basename(f)}'
                     zipArch.write(path.abspath(f), secondpth)
         zipArch.close() # Но это не точно...
-
 # Не тестировалось
 def get_core_config() -> dict:
     """Читает конфиг сборщка
@@ -88,7 +86,7 @@ def get_core_config() -> dict:
         print('File not found')
         exit(6)
     return core_config
-
+# Запуск алгоритма сборки
 def build_start(config_input: str) -> None:
     """Запуск алгоритма сборки
 
@@ -97,7 +95,7 @@ def build_start(config_input: str) -> None:
     """
     config = build_config(config_input)
     config.outprint()
-
+# Запуск скрипта
 if __name__ == '__main__':
     """Запуск скрипта
     """
