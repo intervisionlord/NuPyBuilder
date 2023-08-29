@@ -1,4 +1,19 @@
-version: 0.0.1.4
+main:
+  name: NuPyBuilder
+  version: 0.0.1.5
+  author: intervision
+  authorlink: https://github.com/intervisionlord
+
+default_params:
+  - windows-disable-console
+  - follow-imports
+  - onefile
+  - standalone
+  - remove-output
+  - windows-product-name="NuPyProject"
+  - windows-company-name="CompanyName"
+  - windows-product-version
+  - windows-file-description="Product description"
 
 # main:
 #   product_name: Product
@@ -13,17 +28,6 @@ version: 0.0.1.4
 #   workdir: workdir
 
 # plugins: pyqt5
-
-# params:
-#   - windows-disable-console
-#   - follow-imports
-#   - onefile
-#   - standalone
-#   - remove-output
-#   - windows-product-name="Product Name"
-#   - windows-company-name="TWR"
-#   - windows-product-version
-#   - windows-file-description="Product description"
 
 # # files:
 # #   - ui/imgs/open.png
