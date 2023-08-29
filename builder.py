@@ -1,3 +1,6 @@
+"""Сборщик Python программ в исполняемые файлы Windows."""
+# pylint: disable=import-error
+# Какой-то баг линтера гитхаб с yaml
 import zipfile
 from os import path
 # from os import system as runCommand
@@ -92,7 +95,7 @@ def get_core_config() -> dict:
         sysexit(6) # Потому что 42, вот почему!
     return core_config
 # Получение конфига сборки (не тестировалось)
-def get_build_config(conf_path: str) -> dict:
+def get_build_config(conf_path: str) -> dict | None:
     """Читает конфиг сборки
 
     Args:
@@ -109,6 +112,7 @@ def get_build_config(conf_path: str) -> dict:
         with open(conf_path, 'r', encoding = 'utf8') as build_conf_yaml:
             build_config = loadyaml(build_conf_yaml)
             return build_config
+    return None
 # Запуск алгоритма сборки
 def build_start(config_input: str) -> None:
     """Запуск алгоритма сборки
