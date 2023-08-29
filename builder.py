@@ -1,6 +1,7 @@
 """Сборщик Python программ в исполняемые файлы Windows."""
 # pylint: disable=import-error
 # Какой-то баг линтера гитхаб с yaml
+from __future__ import annotations
 import zipfile
 from os import path
 # from os import system as runCommand
