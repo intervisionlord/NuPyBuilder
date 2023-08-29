@@ -1,10 +1,10 @@
 import zipfile
-from yaml import full_load as loadyaml
-from os import system as runCommand
 from os import path
+# from os import system as runCommand
 from sys import argv
 from sys import exit as sysexit
 from datetime import datetime
+from yaml import full_load as loadyaml
 # from functions.man import manpage as man
 
 class BuildConfig:
@@ -73,7 +73,8 @@ class BuildConfig:
             zip_arch.write(self.outfile)
             if len(self.addition_files) > 0: # Протестировать бы, но потом...
                 for other_files in self.addition_files:
-                    secondpth = f'{path.basename(path.dirname(path.abspath(other_files)))}/{path.basename(other_files)}'
+                    secondpth = f'{path.basename(path.dirname(path.abspath(other_files)))}\
+                        /{path.basename(other_files)}'
                     zip_arch.write(path.abspath(other_files), secondpth)
         zip_arch.close() # Но это не точно...
 # Получение основного конфига (не тестировалось)
@@ -119,8 +120,6 @@ def build_start(config_input: str) -> None:
     config.outprint()
 # Запуск скрипта
 if __name__ == '__main__':
-    """Запуск скрипта
-    """
     # man()
     set_build_config = input('Укажите файл сборки конфига:')
     if set_build_config is None or set_build_config == '':
