@@ -2,11 +2,11 @@ import zipfile
 from yaml import full_load as loadyaml
 from os import system as runCommand
 from os import path
-# from sys import argv
+from sys import argv
 from datetime import datetime
 # from functions.man import manpage as man
 
-class build_config:
+class BuildConfig:
     """Класс динамической конфигурации
     """
     def __init__(self, build_config: str = 'configs/config.yaml') -> None:
@@ -72,7 +72,7 @@ class build_config:
                     secondpth = f'{path.basename(path.dirname(path.abspath(f)))}/{path.basename(f)}'
                     zipArch.write(path.abspath(f), secondpth)
         zipArch.close() # Но это не точно...
-# Не тестировалось
+# Получение основного конфига (не тестировалось)
 def get_core_config() -> dict:
     """Читает конфиг сборщка
 
@@ -86,6 +86,24 @@ def get_core_config() -> dict:
         print('File not found')
         exit(6)
     return core_config
+# Получение конфига сборки (не тестировалось)
+def get_build_config(conf_path: str) -> dict:
+    """Читает конфиг сборки
+
+    Args:
+        conf_path (str): Путь до персонализированного конфига сборки
+
+    Returns:
+        dict: Словарь с параметрами конфигурации определенной сборки
+    """
+    if conf_path == '':
+        print(
+            'Не указан файл конфигурации сборки.\n'
+            f'Необходимо запускать "{argv[0]} <путь до конфига>"')
+    else:
+        with open(conf_path, 'r') as build_conf_yaml:
+            build_config = loadyaml(build_conf_yaml)
+            return build_config
 # Запуск алгоритма сборки
 def build_start(config_input: str) -> None:
     """Запуск алгоритма сборки
@@ -93,7 +111,7 @@ def build_start(config_input: str) -> None:
     Args:
         config_input (str): Путь к файлу конфига сборки
     """
-    config = build_config(config_input)
+    config = BuildConfig(config_input)
     config.outprint()
 # Запуск скрипта
 if __name__ == '__main__':
@@ -102,7 +120,7 @@ if __name__ == '__main__':
     # man()
     config_input = input('Укажите файл сборки конфига:')
     if config_input is None or config_input == '':
-        print('Конфиг не указан')
+        print('Конфиг сборки не указан')
     else:
         build_start(config_input)
 
