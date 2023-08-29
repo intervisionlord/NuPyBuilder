@@ -1,18 +1,36 @@
-def man_build():
+"""Краткая справка по програме."""
+from sys import exit as sysexit
+
+def man_build() -> None:
+    """Справка по сборке
+
+    Returns:
+        None:
+    """
     print(
         ''
     )
     manpage()
+# Справка по конфигам
+def man_config() -> None:
+    """Справка по конфигам
 
-def man_config():
+    Returns:
+        None:
+    """
     print(
         'Для каждой отдельной сборки необходим отдельный файл конфигурации.'
         'Файлы конфигурации сборок должны располагаться в директории "configs"'
         'Формат конфигураций сборок - YAML'
     )
     manpage()
+# Основной раздел справки
+def manpage() -> None:
+    """Основной раздел справки
 
-def manpage():
+    Returns:
+        None:
+    """
     man_pages = [
         'man_build',
         'man_config'
@@ -26,13 +44,13 @@ def manpage():
     )
     for i in man_pages:
         print(f'{man_pages.index(i)} - {i}')
-    
     page = input(
         'Для дополнительной информации выберите номер интересующей страницы\n'
         'или "q" для выхода из справки:\n'
     )
     if page in ['exit', 'quit', 'q', 'x']:
-        exit(0)
+        sysexit(0)
 
 if __name__ == '__main__':
     manpage()
+    
