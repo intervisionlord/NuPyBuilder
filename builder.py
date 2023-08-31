@@ -9,6 +9,7 @@ from sys import argv
 from sys import exit as sysexit
 from datetime import datetime
 from yaml import full_load as loadyaml
+# from functions.log import Log
 # from functions.man import manpage as man
 
 class BuildConfig:
