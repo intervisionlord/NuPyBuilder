@@ -1,4 +1,5 @@
 __pycache__/*
 configs/_*
+_source
 *.exe
 *.pyc

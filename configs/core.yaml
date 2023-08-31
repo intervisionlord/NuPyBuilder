@@ -1,6 +1,6 @@
 main:
   name: NuPyBuilder
-  version: 0.0.1.6f
+  version: 0.0.1.7
   author: intervision
   authorlink: https://github.com/intervisionlord
 
@@ -14,22 +14,3 @@ default_params:
   - windows-company-name="CompanyName"
   - windows-product-version
   - windows-file-description="Product description"
-
-# main:
-#   product_name: Product
-#   version: '0.0.1.0'
-#   author: 'intervision'
-#   authorlink: 'https://github.com/intervisionlord'
-#   icon: '../ui/imgs/flask.png'
-
-# source:
-#   mainfile: mainfile
-#   outputfile: outfile
-#   workdir: workdir
-
-# plugins: pyqt5
-
-# # files:
-# #   - ui/imgs/open.png
-# #   - ui/imgs/reset.png
-# #   - ui/imgs/flask.png

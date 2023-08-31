@@ -126,11 +126,14 @@ def build_start(config_input: str) -> None:
 # Запуск скрипта
 if __name__ == '__main__':
     # man()
-    set_build_config = input('Укажите файл сборки конфига:')
-    if set_build_config is None or set_build_config == '':
-        print('Конфиг сборки не указан')
+    if argv[1] == '' or argv[1] is None:
+        set_build_config = input('Укажите файл сборки конфига:')
+        if set_build_config is None or set_build_config == '':
+            print('Конфиг сборки не указан')
+        else:
+            build_start(set_build_config)
     else:
-        build_start(set_build_config)
+        build_start(argv[1])
 ### Старые наработки, они будут понемногу переноситься в основной код,
 ### Но в нормальном виде. После переноса и тестирования они должны быть удалены.
 #
