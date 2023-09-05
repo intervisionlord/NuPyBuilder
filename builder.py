@@ -159,18 +159,6 @@ if __name__ == '__main__':
 ### Старые наработки, они будут понемногу переноситься в основной код,
 ### Но в нормальном виде. После переноса и тестирования они должны быть удалены.
 #
-# def getconfig() -> dict:
-#     """Загружает данные из конфига сборки.
-#
-#     Returns:
-#         dict: Список переменных конфига
-#     """
-#     try:
-#         with open('./config.yaml', 'r') as confFile:
-#             conf: dict = loadyaml(confFile)
-#     except FileNotFoundError:
-#         print('File not found')
-#     return conf
 #
 # def zipOutput():
 #     """Упаковывает готовый файл в архив.
