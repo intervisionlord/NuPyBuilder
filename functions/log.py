@@ -5,6 +5,8 @@ class Log:
     """Создание файла лога для каждой задачи с записью.
     """
     # Тут неплохо добавить проверку, существует ли файл или нет
+    # pylint: disable=consider-using-with
+    # Тут придется именно так.
     def __init__(self, logfile) -> None:
         self.build_name = logfile
         self.logfile = open(f'logs/{logfile}.log', 'a', encoding = 'utf8')
