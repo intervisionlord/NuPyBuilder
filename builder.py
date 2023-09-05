@@ -48,6 +48,8 @@ class BuildConfig:
         self.product_name: str = self.config_file['main']['product_name']
     # Запуск сборки
     def build(self) -> None:
+        """Непосредственный вызов Nuitka
+        """
         parameters_string = '--' + ' --'.join(self.params)
         run_cmd(f'nuitka {parameters_string} \
             --plugin-enable={self.plugins}\
