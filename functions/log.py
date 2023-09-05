@@ -11,6 +11,7 @@ class Log:
         self.build_name = logfile
         self.logfile = open(f'logs/{logfile}.log', 'a', encoding = 'utf8')
         self.separator = '=' * 10
+        self.now = datetime.today().strftime('%d-%m-%Y  %H:%M:%S')
 
     def write(self, row) -> None:
         """Запись передаваемых данных в лог.
@@ -18,13 +19,13 @@ class Log:
         Args:
             row (str): передаваемая строка для записи в лог
         """
-        self.logfile.write(f'{datetime.now()} -- {row}\n')
+        self.logfile.write(f'{self.now} -- {row}\n')
 
     def start(self) -> None:
         """Начало очередной сборки.
         """
         self.logfile.write(
-            f'{datetime.now()}\n \
+            f'{self.now}\n \
             Сборка {self.build_name} начата\n'
             )
 
@@ -33,7 +34,7 @@ class Log:
         """
         self.logfile.write(
             f'\n{self.separator}\n',
-            datetime.now(),
+            self.now,
             'Сборка завершена',
             f'\n{self.separator}\n'
             )
