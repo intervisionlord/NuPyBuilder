@@ -4,12 +4,12 @@
 from __future__ import annotations
 import zipfile
 from os import path
-# from os import system as runCommand
+from os import system as run_cmd
 from sys import argv
 from sys import exit as sysexit
 from datetime import datetime
 from yaml import full_load as loadyaml
-# from functions.log import Log
+from functions.log import Log
 # from functions.man import manpage as man
 
 class BuildConfig:
@@ -26,6 +26,7 @@ class BuildConfig:
         except FileNotFoundError:
             sysexit(f'[Err.:6] Файл не найден или не указан: {config_file}')
         # Cекция source конфига
+        # Есть идея, но потом (забить на переменные для каждой секции конфига.)
         self.mainfile, self.outfile, self.workdir = [
             self.config_file['source']['mainfile'],
             self.config_file['source']['outputfile'],
@@ -42,6 +43,14 @@ class BuildConfig:
         self.params: list = self.config_file['params']
         self.addition_files = self.config_file['files']
         self.product_name: str = self.config_file['main']['product_name']
+    # Запуск сборки
+    def build(self) -> None:
+        parameters_string = '--' + ' --'.join(self.params)
+        run_cmd(f'nuitka {parameters_string} \
+            --plugin-enable={self.plugins}\
+            --windows-icon-from-ico={self.config_file["main"]["icon"]}\
+                {self.config_file["source"]["mainfile"]}')
+#             --include-data-files=../ui/imgs/*.png=imgs/\
     # Вывод параметров конфига, в случае необходимости
     def outprint(self) -> None:
         """Вывод параметров конфига
@@ -126,6 +135,10 @@ def build_start(config_input: str) -> None:
     """
     config = BuildConfig(config_input)
     config.outprint()
+    config.build()
+    log = Log(config_input)
+    log.start()
+    log.write(f'Используется основной файл: {config.config_file["source"]["mainfile"]}')
 # Запуск скрипта
 if __name__ == '__main__':
     # man()

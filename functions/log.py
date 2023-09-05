@@ -6,9 +6,8 @@ class Log:
     """
     # Тут неплохо добавить проверку, существует ли файл или нет
     def __init__(self, logfile) -> None:
-        with open(f'log/{logfile}', 'w', encoding = 'utf8') as opened_logfile:
-            self.logfile = opened_logfile
-        self.now = datetime.now()
+        self.build_name = logfile
+        self.logfile = open(f'logs/{logfile}.log', 'a', encoding = 'utf8')
         self.separator = '=' * 10
 
     def write(self, row) -> None:
@@ -17,17 +16,14 @@ class Log:
         Args:
             row (str): передаваемая строка для записи в лог
         """
-        self.logfile.write(f'{row}\n')
-        self.logfile.close()
+        self.logfile.write(f'{datetime.now()} -- {row}\n')
 
     def start(self) -> None:
         """Начало очередной сборки.
         """
         self.logfile.write(
-            f'\n{self.separator}\n',
-            self.now(),
-            f'Сборка {self.logfile} начата',
-            f'\n{self.separator}\n'
+            f'{datetime.now()}\n \
+            Сборка {self.build_name} начата\n'
             )
 
     def stop(self) -> None:
@@ -39,3 +35,4 @@ class Log:
             'Сборка завершена',
             f'\n{self.separator}\n'
             )
+        self.logfile.close()
