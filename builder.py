@@ -32,6 +32,9 @@ class BuildConfig:
             self.config_file['source']['outputfile'],
             self.config_file['source']['workdir']
         ]
+        # Пригодится в будущем
+        # self.source = self.config_file['source']
+        # self.main = self.config_file['main']
         # Секция main конфига
         self.version, self.author, self.authorlink = [
             self.config_file['main']['version'],
