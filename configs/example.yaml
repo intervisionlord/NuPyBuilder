@@ -1,30 +1,30 @@
 main:
-  product_name: Your Product's name
-  version: '0.0.1.0' # 4 digits prefered
-  author: Your Name
-  authorlink: URL tp Your website
-  icon: Path to Icon of your app # abs. pathg prefered
+  product_name: # Product name e.g.: "My Program"
+  version: # Version (4 digits dot separated, like 1.0.0.0)
+  author: # Author or developer name
+  authorlink: # Author's website
+  icon: # Path to your program icon with straight slashes (e.g.: "some/path/app.ico")
+  archive: # Pack your app in ZIP archive with all addition files ("yes / no")
 
 source:
-  mainfile: path to the main file of your application (*.py)
-  outputfile: path to the output file of your application (*.exe)
-  workdir: workdir where your application will be compiled
+  mainfile: # Path to *.py main file with straight slashes (e.g.: "some/path/app.py")
+  outputfile: # Final file name (like app.exe)
+  workdir: # Deprecated
 
-plugins: #pyqt5 for example
+plugins: # Requiered plugins like pyqt5 or other
 
-params:
+params: # All requiered parameters for Nuitka
   - windows-disable-console
   - follow-imports
   - onefile
   - standalone
   - remove-output
-  - windows-product-name="Product Name"
-  - windows-company-name="Company Name"
-  - windows-product-version
-  - windows-file-description="Product description"
+  - windows-product-name="My App"
+  - windows-company-name="My Company"
+  - windows-product-version="0.0.0.0"
+  - windows-file-description="My App Description"
+  - output-dir="" # Path with straight slashes where your compiled app would be placed
 
-files:
-  # - List of files to add to the archive with main file
-  # - ui/imgs/open.png
-  # - ui/imgs/reset.png
-  # - ui/imgs/flask.png
+files: # All additional files that should be placed with your app
+  - # path/to/some/file.ext
+  - # path/to/another/file.ext
