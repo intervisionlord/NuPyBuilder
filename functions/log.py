@@ -31,7 +31,7 @@ class Log:
         """
         self.logfile.write(
             f'\n{self.separator}\n',
-            self.now(),
+            datetime.now(),
             'Сборка завершена',
             f'\n{self.separator}\n'
             )
