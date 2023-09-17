@@ -14,7 +14,6 @@
 - [Настройки](#настройки)
   - [Настройки сборщика](#настройки-сборщика)
   - [Настройки проектов](#настройки-проектов)
-    - [Пример конфига](#пример-конфига)
 
 
 ## Описание
@@ -30,6 +29,27 @@
 ## GUI
 В разработке
 ## Настройки
+Все настройки выполнены в виде `yaml` файлов.
 ### Настройки сборщика
+Базовые настройки:
+*core.yaml*
+```
+main: # Основная секция конфига
+  name: NuPyBuilder # название сборщика
+  version: 0.0.4.1 # текущая версия сборщика
+  author: intervision # разработчик
+  authorlink: https://github.com/intervisionlord # ссылка на профиль в github
+
+default_params: # Параметры по-умолчанию используются если не указаны в индивидуальном конфиге сборки
+  - windows-disable-console
+  - follow-imports
+  - onefile
+  - standalone
+  - remove-output
+  - windows-product-name="NuPyProject"
+  - windows-company-name="CompanyName"
+  - windows-product-version="0.0.0.0"
+  - windows-file-description="Product description"
+```
 ### Настройки проектов
-#### Пример конфига
+Настройки сборок можно создать по примеру `example.yaml`, все параметры описаны и прокомментированы в файле-примере.
